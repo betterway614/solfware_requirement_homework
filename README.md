@@ -11,8 +11,8 @@
 ### 后端技术栈
 - **框架**: FastAPI 0.109+
 - **ORM**: SQLAlchemy 2.0+
-- **数据库**: PostgreSQL 15+
-- **缓存**: Redis 7.0+
+- **数据库**: SQLite (开发环境), PostgreSQL 15+ (生产环境)
+- **缓存**: Redis 7.0+ (可选)
 - **数据处理**: Pandas, NumPy
 - **机器学习**: Scikit-learn, Statsmodels
 - **API文档**: 自动生成 Swagger/OpenAPI
@@ -102,8 +102,9 @@ data_analyse/
 ### 环境要求
 - Python 3.11+
 - Node.js 18+
-- PostgreSQL 15+
-- Redis 7.0+
+- SQLite (开发环境，默认使用)
+- PostgreSQL 15+ (生产环境，可选)
+- Redis 7.0+ (可选)
 - Docker & Docker Compose (可选)
 
 ### 使用Docker部署（推荐）
@@ -137,6 +138,7 @@ pip install -r requirements.txt
 2. 配置环境变量
 ```bash
 cp .env.example .env
+# 默认使用SQLite数据库，无需配置PostgreSQL和Redis
 ```
 
 3. 初始化数据库
@@ -148,6 +150,8 @@ python -m app.db.init_db
 ```bash
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
+
+**注意**: 开发环境默认使用SQLite数据库，避免了复杂的PostgreSQL和Redis配置，适合快速开发和测试。如果需要使用PostgreSQL和Redis，可以修改`.env`文件中的相关配置。
 
 #### 前端开发
 
